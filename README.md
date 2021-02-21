@@ -21,15 +21,17 @@ FORWARD_DB_PORT=3306
 ```
 Initialize the containers.  First run will take a few minutes.
 ```bash
-sail up -d
+sail up 
 ```
 
-Laravel Sail currently requires a restart at this point to avoid crashing during migration. Anyone know why?
-```bash
-sail restart
+#### Database Migrations
+
+Once the database is up and running, you can run migrations.  Wait until you see a line in the output from the above command with the following content before moving on.
+```
+mysql_1         | 2021-02-21T23:33:01.752309Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. ...
 ```
 
-Run the DB migrations
+Run the database migrations in another terminal.
 ```bash
 sail artisan migrate
 ```
@@ -38,6 +40,7 @@ Access the application at http://localhost. Provide the port number if you chang
 
 ### Subsequent Runs
 ```bash
+# Runs in background
 sail up -d
 ```
 
