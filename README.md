@@ -1,6 +1,7 @@
 # Reading List
 An example Laravel & Vue application allowing users to search books and create reading lists.
 
+### Postman
 Book data comes from the _Google Books_ API. Below is a link to manually test the API in Postman. 
 You'll first need an [API key](https://console.cloud.google.com/apis/credentials) and to enable the Books API for that key.
 Once that's done, enter the API key in the collection's *CURRENT_VALUE*  for the for `api_key` variable.
@@ -20,11 +21,18 @@ Create and customize `.env` as desired.
 ```bash 
 cp .env.example .env
 ```
+
 If you run a web or MySQL server locally on default ports, update these in `.env` to avoid conflicts.
-```apacheconf
+```dotenv
 APP_PORT=80
 FORWARD_DB_PORT=3306
 ```
+
+Add the Google API Key mentioned above to the `.env` file.
+```dotenv
+
+```
+
 Initialize the containers.  First run will take a few minutes.
 ```bash
 sail up 
