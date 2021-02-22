@@ -42,6 +42,16 @@ Run the database migrations in another terminal.
 sail artisan migrate
 ```
 
+Build the front-end assets.
+```bash
+sail npm run dev
+```
+
+This will take a small bit of time.  Wait for the following output before the next step.
+```
+webpack compiled successfully
+```
+
 Access the application at http://localhost. Provide the port number if you changed `APP_PORT` to anything other than 80.
 
 ### Subsequent Runs
