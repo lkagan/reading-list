@@ -1,11 +1,10 @@
 <template xmlns="http://www.w3.org/1999/html">
-    <div class="container mx-auto content-center">
+    <div class="container mx-auto content-center max-w-4xl">
         <form @submit.prevent="submit">
             <div class="">
                 <input type="search" class="w-full mb-3"
-                       placeholder="search books" v-model="query"/>
-                <input type="submit" value="search"
-                       class="bg-blue-700 hover:bg-blue-500 text-white py-1 px-2"/>
+                       placeholder="search books by title, author, etc..." v-model="query"/>
+                <Button>Search</Button>
             </div>
         </form>
     </div>
@@ -13,9 +12,10 @@
 
 <script>
 
+import Button from "@/Components/Button";
 export default {
     name: "SearchBar",
-
+    components: {Button},
     data() {
         return {
             query: ''
