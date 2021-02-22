@@ -30,7 +30,7 @@ FORWARD_DB_PORT=3306
 
 Add the Google API Key mentioned above to the `.env` file.
 ```dotenv
-
+MIX_BOOK_API_KEY=
 ```
 
 Initialize the containers.  First run will take a few minutes.
