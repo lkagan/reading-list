@@ -20,11 +20,18 @@ Create and customize `.env` as desired.
 ```bash 
 cp .env.example .env
 ```
+
 If you run a web or MySQL server locally on default ports, update these in `.env` to avoid conflicts.
-```apacheconf
+```dotenv
 APP_PORT=80
 FORWARD_DB_PORT=3306
 ```
+
+Add the Google API Key mentioned above to the `.env` file.
+```dotenv
+
+```
+
 Initialize the containers.  First run will take a few minutes.
 ```bash
 sail up 
