@@ -14,7 +14,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <ul>
-                        <li v-for="book of results.items">
+                        <li v-for="book of searchResults.items">
                             <img
                                 :src="book.volumeInfo.imageLinks?.smallThumbnail"/>
                             ID: {{ book.id }}<br>
@@ -31,17 +31,24 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
     name: "SearchBar",
 
     data() {
         return {
-            results: {},
             search: ''
         }
     },
 
+    computed: {
+        ...mapState(['searchResults'])
+    },
+
     methods: {
+        ...mapMutations(['setSearchResults']),
+
         /**
          * Handle the search form submission
          */
@@ -56,7 +63,7 @@ export default {
 
             axios.get('/volumes', {params})
                 .then(response => {
-                    this.results = response.data
+                    this.setSearchResults(response.data)
                 })
                 // If production code, handle this properly
                 .catch(e => console.log(e.response))
@@ -64,7 +71,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>
