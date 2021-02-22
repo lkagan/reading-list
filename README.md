@@ -1,6 +1,12 @@
 # Reading List
 An example Laravel & Vue application allowing users to search books and create reading lists.
 
+Book data comes from the _Google Books_ API. Below is a link to manually test the API in Postman. 
+You'll first need an [API key](https://console.cloud.google.com/apis/credentials) and to enable the Books API for that key.
+Once that's done, enter the API key in the collection's *CURRENT_VALUE*  for the for `api_key` variable.
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4722983e00620764db09)
+
 ## Run Locally on Docker
 
 To save keystrokes, create an alias for Laravel sail 
