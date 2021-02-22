@@ -12,9 +12,13 @@ export default {
         const defaults = {
             maxResults: 10,
             startIndex: 0,
+            key: process.env.MIX_BOOK_API_KEY,
             fields: 'totalItems,items(id,volumeInfo(title,authors,description,imageLinks))',
         }
 
-        return axios.get('/volumes', { params: { ...defaults, ...params} })
+        return axios.get(
+            process.env.MIX_BOOK_API_URL + '/volumes',
+            { params: { ...defaults, ...params} }
+        )
     }
 }
