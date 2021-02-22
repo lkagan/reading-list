@@ -4,6 +4,7 @@ supervisord.pid
 /node_modules
 /public/hot
 /public/storage
+/public/vendor/*
 /public/js/*
 /public/css/*
 /storage/*.key
