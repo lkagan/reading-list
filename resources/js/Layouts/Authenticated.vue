@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <breeze-responsive-nav-link :href="route('logout')" method="post" as="button">
+                            <breeze-responsive-nav-link @click.prevent="logout()" method="post" as="button">
                                 Log Out
                             </breeze-responsive-nav-link>
                         </div>
@@ -118,5 +118,12 @@
                 showingNavigationDropdown: false,
             }
         },
+
+        methods: {
+            logout() {
+                this.$store.commit('resetState')
+                Inertia.get('logout')
+            }
+        }
     }
 </script>
