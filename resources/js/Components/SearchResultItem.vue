@@ -11,7 +11,15 @@
             <br>
             <inertia-link href="/book" class="text-blue-600">more info</inertia-link>
             <br>
-            <Button class="add-to-list mt-3">Add to list</Button>
+            <inertia-link
+                :href="route('books.store')"
+                as="button"
+                method="post"
+                :data="{remote_id: book.id, title: book.volumeInfo.title}"
+                class="add-to-list mt-3 btn"
+            >
+                Add to list
+            </inertia-link>
         </div>
     </div>
 </template>
@@ -32,7 +40,7 @@ export default {
 </script>
 
 <style scoped>
-button.add-to-list {
+.add-to-list {
     font-size: .5em;
     padding: .5em;
     float: right;
