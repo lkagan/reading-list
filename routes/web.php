@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Search');
-})->middleware(['auth', 'verified'])->name('search');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/', fn() => Inertia::render('Search'))->name('search');
+});
 
 require __DIR__.'/auth.php';
