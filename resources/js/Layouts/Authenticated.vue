@@ -38,7 +38,7 @@
                                     </template>
 
                                     <template #content>
-                                        <breeze-dropdown-link :href="route('logout')" method="post" as="button">
+                                        <breeze-dropdown-link  @click.prevent="logout()" as="button">
                                             Log Out
                                         </breeze-dropdown-link>
                                     </template>
@@ -122,7 +122,7 @@
         methods: {
             logout() {
                 this.$store.commit('resetState')
-                Inertia.get('logout')
+                this.$inertia.post('logout')
             }
         }
     }
