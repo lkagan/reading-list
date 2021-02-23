@@ -1,5 +1,6 @@
 <template>
     <div class="py-12">
+        <div style="text-align: center" v-if="results">{{ results.totalItems}} books found</div>
         <div class="max-w-6xl mx-auto lg:px-8">
             <div class="grid grid-cols-2">
                 <SearchResultItem :book="book" v-for="book of results.items"></SearchResultItem>

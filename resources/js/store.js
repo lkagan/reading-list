@@ -1,6 +1,7 @@
 import {createStore} from "vuex"
 import api from "./api"
 
+// Used for restoring the state to clean slate
 const getDefaultState = () => ({ searchResults: {} })
 
 const store = createStore({
@@ -11,7 +12,7 @@ const store = createStore({
 
     mutations: {
         setSearchResults: (state, results) => state.searchResults = results,
-        resetState: state => Object.assign(state, getDefaultState())
+        resetState: state => Object.assign(state, getDefaultState()),
     },
 
     actions: {
