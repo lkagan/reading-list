@@ -1,16 +1,14 @@
 <template xmlns="http://www.w3.org/1999/html">
     <div class="container mx-auto content-center max-w-4xl">
         <form @submit.prevent="submit">
-            <div class="">
-                <input
-                    type="search"
-                    class="w-full mb-3"
-                    placeholder="search books by title, author, etc..."
-                    v-model="query"
-                    required
-                />
-                <Button>Search</Button>
-            </div>
+            <input
+                type="search"
+                class="w-full mb-3"
+                placeholder="search book title, author, etc..."
+                v-model="query"
+                required
+            />
+            <Button>Search</Button>
         </form>
     </div>
 </template>
