@@ -10,7 +10,7 @@ export default {
      */
     search(params) {
         const defaults = {
-            maxResults: 10,
+            maxResults: 20,
             startIndex: 0,
             key: process.env.MIX_BOOK_API_KEY,
             fields: 'totalItems,items(id,volumeInfo(title,authors,description,imageLinks))',

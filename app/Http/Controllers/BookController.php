@@ -15,11 +15,12 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Inertia\Response
      */
     public function index()
     {
-        return Inertia::render('Books',['books' => Auth::user()->books]);
+        $books =  Auth::user()->books()->priority()->get();
+        return Inertia::render('Books',compact('books'));
     }
 
     /**

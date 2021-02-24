@@ -45,7 +45,41 @@ const store = createStore({
                     commit('setBookList', books)
                 })
                 .catch(e => httpError(e))
-        }
+        },
+
+        /**
+         * Change the order of the items.
+         *
+         * @param commit
+         * @param state
+         * @param list
+         */
+        reorder({commit, state}, list) {
+            // TODO: Reorder the list and send details to the server for saving
+            commit('setBookList', list)
+        },
+
+        /**
+         * Alphabetize the list by title.
+         *
+         * @param commit
+         * @param state
+         */
+        alphabetize({commit, state}) {
+            const books = state.bookList.sort((a, b) => a.title < b.title ? -1 : 1)
+            commit('setBookList', books)
+        },
+
+        /**
+         * Sort the list by priority.
+         *
+         * @param commit
+         * @param state
+         */
+        prioritize({commit, state}) {
+            const books = state.bookList.sort((a, b) => a.priority < b.priority ? -1 : 1)
+            commit('setBookList', books)
+        },
     }
 })
 

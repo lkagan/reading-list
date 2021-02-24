@@ -1,24 +1,40 @@
 <template>
-  <draggable class="dragArea list-group w-full" :list="books">
-    <div
-        class="list-group-item bg-white m-1 p-3 rounded-md cursor-move"
-        v-for="book of books"
-        :key="book.title"
-    >
-      {{ book.title }}
-      <i
-          class="cursor-pointer material-icons float-right text-red-600"
-          @click="deleteBook(book)"
-      >delete_forever</i>
-    </div>
-  </draggable>
+  <div class="text-center italic h-6">
+    <span :class="{hidden: !reorderable}" class="text-gray-400">drag to change priority</span>
+  </div>
+  <div class="flex w-3/4 lg:w-1/2 mx-auto">
+    <draggable class="dragArea list-group w-full" v-model="books">
+      <div
+          class="list-group-item bg-white m-1 p-3 rounded-md flex"
+          :class="{'cursor-move': reorderable}"
+          v-for="book of books"
+          :key="book.title"
+      >
+        <div class="w-7">{{ book.priority }}</div>
+        <div class="flex-grow">{{ book.title }}</div>
+        <div>
+          <i
+              class="cursor-pointer material-icons float-right text-red-600"
+              @click="deleteBook(book)"
+          >delete_forever</i>
+        </div>
+      </div>
+    </draggable>
+  </div>
 </template>
 
 <script>
-import { VueDraggableNext } from 'vue-draggable-next'
+import {VueDraggableNext} from 'vue-draggable-next'
 
 export default {
   name: "MyList",
+
+  props: {
+    sort: {
+      type: String,
+      required: false
+    }
+  },
 
   components: {
     draggable: VueDraggableNext,
@@ -40,8 +56,19 @@ export default {
   },
 
   computed: {
-    books() {
-      return this.$store.state.bookList
+    // Only allow the user to reorder the books when sorting by priority.
+    reorderable() {
+      return this.sort === 'priority'
+    },
+
+    books: {
+      get() {
+        return this.$store.state.bookList
+      },
+
+      set(list) {
+        this.$store.dispatch('reorder', list)
+      }
     }
   }
 }
