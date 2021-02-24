@@ -1,18 +1,20 @@
 import {createStore} from "vuex"
-import api from "./api"
+import httpError from "@/httpError"
+import api from "@/api"
 
 // Used for restoring the state to clean slate
-const getDefaultState = () => ({ searchResults: {} })
+const getDefaultState = () => ({searchResults: {}, bookList: []})
 
 const store = createStore({
     state: {
-        // Google Book API search results
         searchResults: {},
+        bookList: [],
     },
 
     mutations: {
         setSearchResults: (state, results) => state.searchResults = results,
         resetState: state => Object.assign(state, getDefaultState()),
+        setBookList: (state, books) => state.bookList = books,
     },
 
     actions: {
@@ -21,19 +23,28 @@ const store = createStore({
          *
          * @param commit
          * @param params
-         * @returns {Promise<void>}
+         * @returns {Promise}
          */
-        async search({commit}, params) {
+        search({commit}, params) {
             api.search(params)
                 .then(response => commit('setSearchResults', response.data))
-                .catch(e => {
-                    if (! e?.response) {
-                        alert('No network connection')
-                    } else {
-                        alert('🚨 Oops, something went wrong')
-                    }
-                    console.log(e)
+                .catch(e => httpError(e))
+        },
+
+        /**
+         * Delete a book from the server and locally
+         *
+         * @param {Object}
+         * @param {string} bookId
+         * @returns {Promise}
+         */
+        deleteBook({commit, state}, bookId) {
+            api.deleteBook(bookId)
+                .then(() => {
+                    const books = state.bookList.filter(book => book.id !== bookId)
+                    commit('setBookList', books)
                 })
+                .catch(e => httpError(e))
         }
     }
 })

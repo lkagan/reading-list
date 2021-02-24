@@ -7,15 +7,7 @@
         </template>
 
         <div class="flex w-3/4 lg:w-1/2 mx-auto mt-12">
-            <draggable class="dragArea list-group w-full" :list="books">
-                <div
-                    class="list-group-item bg-white m-1 p-3 rounded-md"
-                    v-for="book of books"
-                    :key="book.title"
-                >
-                    {{ book.title }}
-                </div>
-            </draggable>
+            <my-list :books="books"></my-list>
         </div>
 
     </breeze-authenticated-layout>
@@ -23,7 +15,7 @@
 
 <script>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated'
-import { VueDraggableNext } from 'vue-draggable-next'
+import MyList from "@/Components/MyList";
 
 export default {
     name: 'Books',
@@ -36,8 +28,12 @@ export default {
     },
 
     components: {
-        BreezeAuthenticatedLayout,
-        draggable: VueDraggableNext,
+        MyList,
+        BreezeAuthenticatedLayout
+    },
+
+    created() {
+        this.$store.commit('setBookList', this.books)
     }
 }
 </script>
