@@ -5,7 +5,7 @@
                 Search
             </h2>
         </template>
-        <div class="py-12">
+        <div class="py-12 mx-6">
             <search-bar></search-bar>
             <search-results v-if="Object.keys(results || {}).length" :results="results"></search-results>
         </div>

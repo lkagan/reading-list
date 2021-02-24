@@ -2,6 +2,7 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Search');
-})->middleware(['auth', 'verified'])->name('search');
+// Redirect requests for home to the search page.  Will redirect guests to login.
+Route::get('/', fn() => redirect(route('search')));
+
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/search', fn() => Inertia::render('Search'))->name('search');
+
+    // Books
+    Route::prefix('books')->name('books.')->group(function () {
+        Route::post('', [BookController::class, 'store'])->name('store');
+    });
+});
 
 require __DIR__.'/auth.php';

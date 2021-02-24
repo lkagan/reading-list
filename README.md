@@ -1,7 +1,23 @@
 # Reading List
 An example Laravel & Vue application allowing users to search books and create reading lists.
 
-### Postman
+
+## Code Points of Interest
+
+### Backend
+* Laravel 8 with [Inertia](https://inertiajs.com/)
+* PHP 8  
+* Validation uses [Form Requests](https://laravel.com/docs/8.x/validation#form-request-validation)
+* PHPUnit tests
+    * BookControllerTest.php
+* API responses use [Eloquent API Resources](https://laravel.com/docs/8.x/eloquent-resources)
+
+### Frontend
+* Vue 3
+* Vuex
+* TailwindCSS
+
+## Postman
 Book data comes from the _Google Books_ API. Below is a link to manually test the API in Postman. 
 You'll first need an [API key](https://console.cloud.google.com/apis/credentials) and to enable the Books API for that key.
 Once that's done, enter the API key in the collection's *CURRENT_VALUE*  for the for `api_key` variable.
