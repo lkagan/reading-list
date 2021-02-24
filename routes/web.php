@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Books
     Route::prefix('books')->name('books.')->group(function () {
         Route::post('', [BookController::class, 'store'])->name('store');
+        Route::get('', [BookController::class, 'index'])->name('index');
     });
 });
 
