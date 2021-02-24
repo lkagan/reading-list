@@ -17,7 +17,7 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('remote_id')->unique();
-            $table->unsignedSmallInteger('priority')->nullable();
+            $table->unsignedSmallInteger('priority');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

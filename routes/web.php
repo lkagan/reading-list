@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::post('', [BookController::class, 'store'])->name('store');
         Route::get('', [BookController::class, 'index'])->name('index');
         Route::delete('{book}', [BookController::class, 'destroy'])->name('destroy');
+        Route::patch('', [BookController::class, 'reorder'])->name('reorder');
     });
 });
 
