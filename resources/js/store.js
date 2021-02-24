@@ -23,7 +23,6 @@ const store = createStore({
          *
          * @param commit
          * @param params
-         * @returns {Promise}
          */
         search({commit}, params) {
             api.search(params)
