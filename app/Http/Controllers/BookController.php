@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\BookResource;
 use App\Http\Requests\BookAddRequest;
 
 class BookController extends Controller
@@ -22,20 +23,20 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param BookAddRequest $request
+     * @return BookResource
      */
-    public function store(BookAddRequest $request)
+    public function store(BookAddRequest $request): BookResource
     {
-        Auth::user()->books()->create($request->only(['title', 'remote_id']));
-        $msg = 'Successfully added ' . $request->title . ' to your list';
-        return redirect()->route('search')->with(['successMsg' => $msg]);
+        return new BookResource(
+            Auth::user()->books()->create($request->only(['title', 'remote_id']))
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */

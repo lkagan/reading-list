@@ -25,7 +25,7 @@ class BookAddRequest extends FormRequest
     {
         return [
             'title'     => 'required|max:255',
-            'remote_id' => 'required|max:255',
+            'remote_id' => 'required|unique:books|max:255',
         ];
     }
 }

@@ -16,7 +16,9 @@ class BookControllerTest extends TestCase
     {
         $this->actingAs(User::factory()->create());
         $data = Book::factory()->make()->only(['title', 'remote_id']);
-        $this->post(route('books.store'), $data)->assertRedirect(route('search'));
+        $this->post(route('books.store'), $data)
+            ->assertSuccessful()
+            ->assertJsonFragment($data);
         $this->assertDatabaseHas('books', $data);
     }
 
