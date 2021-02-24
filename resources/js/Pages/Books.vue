@@ -9,7 +9,7 @@
             <label class="mr-5">Sort by:</label>
             <input
                 type="radio"
-                class="form-radio"
+                class="form-radio mr-2"
                 @click="$store.dispatch('alphabetize')"
                 name="sort"
                 v-model="sort"
@@ -17,14 +17,14 @@
             > title
             <input
                 type="radio"
-                class="form-radio ml-5"
+                class="form-radio ml-7 mr-2"
                 @click="$store.dispatch('prioritize')"
                 name="sort"
                 v-model="sort"
                 value="priority"
             > priority
         </div>
-        <my-list :books="books"></my-list>
+        <my-list :books="books" :sort="sort"></my-list>
     </breeze-authenticated-layout>
 </template>
 
