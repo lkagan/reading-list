@@ -1,21 +1,23 @@
 # Reading List
-An example Laravel & Vue application allowing users to search books and create reading lists.
+An example Laravel 8 & Vue 3 application with Inertia that allows users to search books and create reading lists.
 
-
-## Code Points of Interest
-
-### Backend
-* Laravel 8 with [Inertia](https://inertiajs.com/)
-* PHP 8  
-* Validation uses [Form Requests](https://laravel.com/docs/8.x/validation#form-request-validation)
-* PHPUnit tests
-    * BookControllerTest.php
-* API responses use [Eloquent API Resources](https://laravel.com/docs/8.x/eloquent-resources)
-
-### Frontend
-* Vue 3
-* Vuex
-* TailwindCSS
+## Code Review Quick Links
+* Laravel routes [web.php](https://github.com/lkagan/reading-list/blob/main/routes/web.php)
+* Controller test [BookControllerTest.php](https://github.com/lkagan/reading-list/blob/main/tests/Feature/BookControllerTest.php)
+* Controller [BookController.php](https://github.com/lkagan/reading-list/blob/main/app/Http/Controllers/BookController.php)
+* Form request [BookAddRequest.php](https://github.com/lkagan/reading-list/blob/main/app/Http/Requests/BookAddRequest.php)  
+* Book JSON resource [BookResource.php](https://github.com/lkagan/reading-list/blob/main/app/Http/Resources/BookResource.php)
+* Model [Book.php](https://github.com/lkagan/reading-list/blob/main/app/Models/Book.php)
+* Factory [BookFactory.php](https://github.com/lkagan/reading-list/blob/main/database/factories/BookFactory.php)
+* Vuex store: [store.js](https://github.com/lkagan/reading-list/blob/main/resources/js/store.js)
+* Book search  
+    * [Search.vue](https://github.com/lkagan/reading-list/blob/main/resources/js/Pages/Search.vue)
+    * [SearchBar.vue](https://github.com/lkagan/reading-list/blob/main/resources/js/Components/SearchBar.vue)
+    * [SearchResults.vue](https://github.com/lkagan/reading-list/blob/main/resources/js/Components/SearchResults.vue)
+    * [SearchResultItem.vue](https://github.com/lkagan/reading-list/blob/main/resources/js/Components/SearchResultItem.vue)
+* Reading List    
+    * [Books.vue](https://github.com/lkagan/reading-list/blob/main/resources/js/Pages/Books.vue)
+    * [MyList.vue](https://github.com/lkagan/reading-list/blob/main/resources/js/Components/MyList.vue)
 
 ## Postman
 Book data comes from the _Google Books_ API. Below is a link to manually test the API in Postman. 
