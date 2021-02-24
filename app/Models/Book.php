@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +14,18 @@ class Book extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    /**
+     * Set the next priority for new books when creating new records
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function (Model $book) {
+            $book->priority = Auth::user()->books()->max('priority') + 1;
+        });
+    }
 
     /**
      * Get the user relationship

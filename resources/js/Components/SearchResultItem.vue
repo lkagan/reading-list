@@ -26,6 +26,7 @@
 
 <script>
 import Button from "@/Components/Button"
+import httpError from "@/httpError";
 
 export default {
     name: "SearchResultItem",
@@ -51,14 +52,7 @@ export default {
                     this.bookAdded = true
                     alert('Added ' + response.data.data.title)
                 })
-                .catch(e => {
-                    if (! e?.response) {
-                        alert('No network connection')
-                    } else {
-                        alert('Could not add book to list.  See JS console.')
-                        console.log(e.response)
-                    }
-                })
+                .catch(e => httpError(e))
         }
     }
 }
