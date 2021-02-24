@@ -5,11 +5,26 @@
                 My List
             </h2>
         </template>
-
-        <div class="flex w-3/4 lg:w-1/2 mx-auto mt-12">
-            <my-list :books="books"></my-list>
+        <div class="text-center mt-12 mb-5">
+            <label class="mr-5">Sort by:</label>
+            <input
+                type="radio"
+                class="form-radio"
+                @click="$store.dispatch('alphabetize')"
+                name="sort"
+                v-model="sort"
+                value="title"
+            > title
+            <input
+                type="radio"
+                class="form-radio ml-5"
+                @click="$store.dispatch('prioritize')"
+                name="sort"
+                v-model="sort"
+                value="priority"
+            > priority
         </div>
-
+        <my-list :books="books"></my-list>
     </breeze-authenticated-layout>
 </template>
 
@@ -30,6 +45,12 @@ export default {
     components: {
         MyList,
         BreezeAuthenticatedLayout
+    },
+
+    data() {
+        return {
+            sort: 'priority'
+        }
     },
 
     created() {

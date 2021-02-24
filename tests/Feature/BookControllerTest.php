@@ -36,7 +36,7 @@ class BookControllerTest extends TestCase
         $this->actingAs(User::factory()->create());
         $book = Book::factory()->create(['user_id' => Auth::id()]);
         $this->deleteJson(route('books.destroy', $book))->assertSuccessful();
-        $this->assertDatabaseMissing('books', $book);
+        $this->assertDatabaseMissing('books', $book->toArray());
     }
 
     /** @test */

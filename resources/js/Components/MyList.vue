@@ -1,17 +1,19 @@
 <template>
-  <draggable class="dragArea list-group w-full" :list="books">
-    <div
-        class="list-group-item bg-white m-1 p-3 rounded-md cursor-move"
-        v-for="book of books"
-        :key="book.title"
-    >
-      {{ book.title }}
-      <i
-          class="cursor-pointer material-icons float-right text-red-600"
-          @click="deleteBook(book)"
-      >delete_forever</i>
-    </div>
-  </draggable>
+  <div class="flex w-3/4 lg:w-1/2 mx-auto">
+    <draggable class="dragArea list-group w-full" v-model="books">
+      <div
+          class="list-group-item bg-white m-1 p-3 rounded-md cursor-move"
+          v-for="book of books"
+          :key="book.title"
+      >
+        {{ book.title }}
+        <i
+            class="cursor-pointer material-icons float-right text-red-600"
+            @click="deleteBook(book)"
+        >delete_forever</i>
+      </div>
+    </draggable>
+  </div>
 </template>
 
 <script>
@@ -40,8 +42,14 @@ export default {
   },
 
   computed: {
-    books() {
-      return this.$store.state.bookList
+    books: {
+      get() {
+        return this.$store.state.bookList
+      },
+
+      set(list) {
+        this.$store.dispatch('reorder', list)
+      }
     }
   }
 }
