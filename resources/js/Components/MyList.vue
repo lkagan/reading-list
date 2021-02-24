@@ -67,7 +67,7 @@ export default {
       },
 
       set(list) {
-        this.$store.dispatch('reorder', list)
+        this.$store.dispatch('changeOrder', list)
       }
     }
   }

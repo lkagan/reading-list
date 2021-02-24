@@ -2,7 +2,7 @@ import {createStore} from "vuex"
 import httpError from "@/httpError"
 import api from "@/api"
 
-// Used for restoring the state to clean slate
+// Used for restoring the state to a clean slate
 const getDefaultState = () => ({searchResults: {}, bookList: []})
 
 const store = createStore({
@@ -38,25 +38,62 @@ const store = createStore({
          * @param {string} bookId
          * @returns {Promise}
          */
-        deleteBook({commit, state}, bookId) {
-            api.deleteBook(bookId)
-                .then(() => {
-                    const books = state.bookList.filter(book => book.id !== bookId)
-                    commit('setBookList', books)
-                })
+        async deleteBook({commit, state, dispatch}, bookId) {
+            let books
+
+            try {
+                // Delete the book
+                await api.deleteBook(bookId)
+                books = state.bookList.filter(book => book.id !== bookId)
+                commit('setBookList', books)
+            } catch(e) {
+                httpError(e)
+            }
+
+            dispatch('reorder', books)
+        },
+
+        /**
+         * Update the priority values to be consecutive (remove gaps)
+         *
+         * @param state
+         * @param commit
+         * @param books
+         */
+        reorder({state, commit}, books) {
+            const copy = [...state.bookList]
+            copy.sort((a, b) => a.priority < b.priority ? -1 : 1)
+            let priority = 1
+            copy.forEach(book =>  book.priority = priority++ )
+
+            // Send the updated priorities to the server
+            const priorityMap = state.bookList.map(book => {
+                return {id: book.id, priority: book.priority}
+            })
+
+            api.reorder(priorityMap)
+                .then(commit('setBookList', books))
                 .catch(e => httpError(e))
         },
 
         /**
-         * Change the order of the items.
+         * Change the priority of values based on list order
          *
-         * @param commit
          * @param state
-         * @param list
+         * @param commit
          */
-        reorder({commit, state}, list) {
-            // TODO: Reorder the list and send details to the server for saving
-            commit('setBookList', list)
+        changeOrder({state, commit}, books) {
+            let priority = 1
+            books.forEach(book =>  book.priority = priority++ )
+
+            // Send the updated priorities to the server
+            const priorityMap = books.map(book => {
+                return {id: book.id, priority: book.priority}
+            })
+
+            api.reorder(priorityMap)
+                .then(commit('setBookList', books))
+                .catch(e => httpError(e))
         },
 
         /**
@@ -66,7 +103,9 @@ const store = createStore({
          * @param state
          */
         alphabetize({commit, state}) {
-            const books = state.bookList.sort((a, b) => a.title < b.title ? -1 : 1)
+            const books = state.bookList.sort((a, b) => {
+                return a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1
+            })
             commit('setBookList', books)
         },
 

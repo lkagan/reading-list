@@ -30,5 +30,15 @@ export default {
      */
     deleteBook(bookId) {
         return axios.delete(`/books/${bookId}`)
+    },
+
+    /**
+     * Update the priorities in a list of books
+     *
+     * @param {Array} bookIds
+     * @returns {Promise<AxiosResponse<any>>}
+     */
+    reorder(bookIds) {
+        return axios.patch('/books/', {books: bookIds})
     }
 }

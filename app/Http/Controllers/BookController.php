@@ -19,8 +19,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books =  Auth::user()->books()->priority()->get();
-        return Inertia::render('Books',compact('books'));
+        $books = Auth::user()->books()->priority()->get();
+        return Inertia::render('Books', compact('books'));
     }
 
     /**
@@ -37,15 +37,19 @@ class BookController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the priorities of a set of Books
      *
      * @param Request $request
-     * @param Book $book
      * @return Response
      */
-    public function update(Request $request, Book $book)
+    public function reorder(Request $request)
     {
-        //
+        foreach ($request->books as $book) {
+            Book::where(['id' => $book['id'], 'user_id' => Auth::id()])
+                ->update(['priority' => $book['priority']]);
+        }
+
+        return response('', 204);
     }
 
     /**
