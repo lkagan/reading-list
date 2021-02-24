@@ -2,7 +2,7 @@ import {createStore} from "vuex"
 import httpError from "@/httpError"
 import api from "@/api"
 
-// Used for restoring the state to clean slate
+// Used for restoring the state to a clean slate
 const getDefaultState = () => ({searchResults: {}, bookList: []})
 
 const store = createStore({
@@ -68,6 +68,26 @@ const store = createStore({
 
             // Send the updated priorities to the server
             const priorityMap = state.bookList.map(book => {
+                return {id: book.id, priority: book.priority}
+            })
+
+            api.reorder(priorityMap)
+                .then(commit('setBookList', books))
+                .catch(e => httpError(e))
+        },
+
+        /**
+         * Change the priority of values based on list order
+         *
+         * @param state
+         * @param commit
+         */
+        changeOrder({state, commit}, books) {
+            let priority = 1
+            books.forEach(book =>  book.priority = priority++ )
+
+            // Send the updated priorities to the server
+            const priorityMap = books.map(book => {
                 return {id: book.id, priority: book.priority}
             })
 
