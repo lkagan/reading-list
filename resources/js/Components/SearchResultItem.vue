@@ -10,9 +10,6 @@
                   v-if="book.volumeInfo.authors">
                 By {{ book.volumeInfo.authors.join(', ') }}
             </span>
-<!--            <br>-->
-<!--            <inertia-link href="/book" class="text-blue-600">more info-->
-<!--            </inertia-link>-->
             <br>
             <button
                 @click="submit(book.id, book.volumeInfo.title)"
