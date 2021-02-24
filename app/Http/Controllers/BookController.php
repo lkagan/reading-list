@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\BookResource;
 use App\Http\Requests\BookAddRequest;
@@ -14,7 +15,7 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -38,8 +39,8 @@ class BookController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
+     * @param Book $book
+     * @return Response
      */
     public function update(Request $request, Book $book)
     {
@@ -49,11 +50,17 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
+     * @param Book $book
+     * @return Response
+     * @throws \Exception
      */
-    public function destroy(Book $book)
+    public function destroy(Book $book): Response
     {
-        //
+        if (Auth::user()->isNot($book->user)) {
+            abort(403);
+        }
+
+        $book->delete();
+        return response('', 204);
     }
 }
