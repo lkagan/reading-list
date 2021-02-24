@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\BookResource;
@@ -17,7 +18,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Books',['books' => Auth::user()->books]);
     }
 
     /**

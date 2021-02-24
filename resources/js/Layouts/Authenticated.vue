@@ -18,6 +18,9 @@
                                 <breeze-nav-link :href="route('search')" :active="route().current('search')">
                                    Search
                                 </breeze-nav-link>
+                                <breeze-nav-link :href="route('books.index')" :active="route().current('books.index')">
+                                    My List
+                                </breeze-nav-link>
                             </div>
                         </div>
 
