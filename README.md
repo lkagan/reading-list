@@ -9,6 +9,7 @@ An example Laravel 8 & Vue 3 application with Inertia that allows users to searc
 * Book JSON resource [BookResource.php](https://github.com/lkagan/reading-list/blob/main/app/Http/Resources/BookResource.php)
 * Model [Book.php](https://github.com/lkagan/reading-list/blob/main/app/Models/Book.php)
 * Factory [BookFactory.php](https://github.com/lkagan/reading-list/blob/main/database/factories/BookFactory.php)
+* API client [api.js](https://github.com/lkagan/reading-list/blob/main/resources/js/api.js)
 * Vuex store: [store.js](https://github.com/lkagan/reading-list/blob/main/resources/js/store.js)
 * Book search  
     * [Search.vue](https://github.com/lkagan/reading-list/blob/main/resources/js/Pages/Search.vue)
