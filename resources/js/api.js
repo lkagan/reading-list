@@ -25,7 +25,7 @@ export default {
     },
 
     /**
-     *
+     * Add a book to the reading list
      */
     addBook(remote_id, title) {
         return axios.post('/books', {remote_id, title})
