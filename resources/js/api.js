@@ -1,3 +1,5 @@
+import httpError from "@/httpError";
+
 /**
  * Collection of API calls.
  */
@@ -20,6 +22,13 @@ export default {
             process.env.MIX_BOOK_API_URL + '/volumes',
             {params: {...defaults, ...params}}
         )
+    },
+
+    /**
+     *
+     */
+    addBook(remote_id, title) {
+        return axios.post('/books', {remote_id, title})
     },
 
     /**

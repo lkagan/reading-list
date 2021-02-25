@@ -22,8 +22,9 @@
 </template>
 
 <script>
-import Button from "@/Components/Button"
+import api from "@/api"
 import httpError from "@/httpError";
+import Button from "@/Components/Button"
 
 export default {
     name: "SearchResultItem",
@@ -44,7 +45,7 @@ export default {
 
     methods: {
         submit(remote_id, title) {
-            axios.post(route('books.store'), {remote_id, title})
+            api.addBook(remote_id, title)
                 .then(response => {
                     this.bookAdded = true
                     alert('Added ' + response.data.data.title)
